@@ -1,0 +1,25 @@
+{
+  "name": "migrate-mongoose",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "serve": "tsc -w",
+    "start": "node lib/index.js",
+    "flow:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "version": "npm run flow:changelog && git add CHANGELOG.md"
+  },
+  "dependencies": {
+    "@types/es6-promise": "^0.0.32",
+    "@types/mongoose": "^4.7.1"
+  },
+  "devDependencies": {
+    "conventional-changelog-cli": "^1.2.0",
+    "mongoose": "^4.7.3",
+    "typescript": "^2.1.4"
+  },
+  "peerDependencies": {
+    "mongoose": "^4.7.3"
+  }
+}

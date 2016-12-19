@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "removeComments": true,
+    "sourceMap": true,
+    "outDir": "lib",
+    "declaration": true
+  },
+  "files": ["src/index.ts"]
+}
