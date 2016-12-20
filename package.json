@@ -1,11 +1,12 @@
 {
-  "name": "migrate-mongoose",
+  "name": "mongoose-model-migration",
   "version": "0.0.1",
   "main": "lib/index.js",
   "license": "MIT",
   "types": "lib/index.d.ts",
   "scripts": {
     "serve": "tsc -w",
+    "build": "tsc",
     "start": "node lib/index.js",
     "flow:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "version": "npm run flow:changelog && git add CHANGELOG.md"
