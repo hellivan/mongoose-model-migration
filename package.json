@@ -4,6 +4,10 @@
   "main": "lib/index.js",
   "license": "MIT",
   "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hellivan/mongoose-model-migration.git"
+  },
   "scripts": {
     "serve": "tsc -w",
     "build": "tsc",
