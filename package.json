@@ -1,8 +1,8 @@
 {
   "name": "mongoose-model-migration",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
-    "node" : ">=5.0.0"
+    "node": ">=5.0.0"
   },
   "main": "lib/index.js",
   "license": "MIT",
