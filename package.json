@@ -1,6 +1,9 @@
 {
   "name": "mongoose-model-migration",
   "version": "0.0.2",
+  "engines": {
+    "node" : ">=5.0.0"
+  },
   "main": "lib/index.js",
   "license": "MIT",
   "types": "lib/index.d.ts",
@@ -16,12 +19,10 @@
     "version": "npm run flow:changelog && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@types/es6-promise": "^0.0.32",
     "@types/mongoose": "^4.7.1"
   },
   "devDependencies": {
     "conventional-changelog-cli": "^1.2.0",
-    "mongoose": "^4.7.3",
     "typescript": "^2.1.4"
   },
   "peerDependencies": {
