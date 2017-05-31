@@ -1,3 +1,8 @@
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/hellivan/mongoose-model-migration/compare/v0.0.4...v0.0.5) (2017-05-31)
+
+
+
 <a name="0.0.4"></a>
 ## [0.0.4](https://github.com/hellivan/mongoose-model-migration/compare/v0.0.3...v0.0.4) (2017-05-30)
 
