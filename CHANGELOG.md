@@ -1,3 +1,21 @@
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/hellivan/mongoose-model-migration/compare/v0.0.5...v0.1.0) (2017-10-30)
+
+
+### Features
+
+* add method for simply upgrading a collection (by name) ([ee2cbf8](https://github.com/hellivan/mongoose-model-migration/commit/ee2cbf8))
+
+
+### BREAKING CHANGES
+
+* migrateDb was renamed to migrateModel
+* writeVersion/readVersion now only accept collection names
+* interface Migration was renamed to ModelMigrationHandler
+* signature for up/down function of ModelMigrationHandler has changed (last two parameters are now fromVersion, toVersion)
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/hellivan/mongoose-model-migration/compare/v0.0.4...v0.0.5) (2017-05-31)
 

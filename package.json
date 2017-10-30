@@ -1,6 +1,6 @@
 {
   "name": "mongoose-model-migration",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "engines": {
     "node": ">=5.0.0"
   },
