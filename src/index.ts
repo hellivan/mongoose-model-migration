@@ -7,7 +7,7 @@ export interface CollectionVersion {
     last: number;
 }
 
-function getVersionCollection(collectionName: string) {
+function getVersionCollection(collectionName: string): any {
     const db = connection.db;
     return db.collection(`${collectionName}.version`);
 }
