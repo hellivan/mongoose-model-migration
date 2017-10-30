@@ -1,3 +1,13 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/hellivan/mongoose-model-migration/compare/v0.1.0...v0.1.1) (2017-10-30)
+
+
+### Bug Fixes
+
+* typings in source-code ([0b50f2e](https://github.com/hellivan/mongoose-model-migration/commit/0b50f2e))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/hellivan/mongoose-model-migration/compare/v0.0.5...v0.1.0) (2017-10-30)
 
