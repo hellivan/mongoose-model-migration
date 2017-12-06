@@ -7,42 +7,36 @@ export interface CollectionVersion {
     last: number;
 }
 
-function getVersionCollection(collectionName: string): any {
-    const db = connection.db;
-    return db.collection(`${collectionName}.version`);
-}
-
-export function writeVersion(collectionName: string, version: number): Promise<CollectionVersion> {
+export function writeVersion(versionCollection: any, version: number): Promise<CollectionVersion> {
     let update: any = {
 	current: version,
 	updated: new Date()
     };
 
-    return readVersion(collectionName)
+    return readVersion(versionCollection)
 	.then(currentVersion => {
-	    if(!currentVersion) return getVersionCollection(collectionName).insertOne(update);
+	    if(!currentVersion) return versionCollection.insertOne(update);
 
 	    update['last'] = currentVersion.current;
 
-	    return getVersionCollection(collectionName)
-		.findOneAndUpdate({_id: currentVersion._id}, update);
+	    return versionCollection.findOneAndUpdate({_id: currentVersion._id}, update);
 	});
 }
 
-export function readVersion(collectionName: string): Promise<CollectionVersion> {
-    return getVersionCollection(collectionName)
-	.findOne({});
+export function readVersion(versionCollection: any): Promise<CollectionVersion> {
+    return versionCollection.findOne({});
 }
 
 
 abstract class AbstractMigrator {
 
     constructor(
-	protected collectionName: string
+	protected collectionName: string,
+	protected versionCollectionName?: string
     ) {}
 
     public migrate(version: number): Promise<any> {
-	return readVersion(this.collectionName)
+	return readVersion(this.getVersionCollection())
 	    .then(currentVersion => {
 		if(currentVersion && currentVersion.current === version) return;
 
@@ -55,11 +49,16 @@ abstract class AbstractMigrator {
 		    return this.downgrade(current, version);
 		}
 	    })
-	    .then(() => writeVersion(this.collectionName, version));
+	    .then(() => writeVersion(this.getVersionCollection(), version));
     }
 
     protected getCollection() {
 	return connection.db.collection(this.collectionName);
+    }
+
+    protected getVersionCollection() {
+	const collectionName = this.versionCollectionName || `${this.collectionName}.version`;
+	return connection.db.collection(collectionName);
     }
 
     protected abstract upgrade(fromVersion: number, toVersion: number);
@@ -79,9 +78,10 @@ class CollectionMigrator extends AbstractMigrator {
 
     constructor(
 	collectionName: string,
-	private migrationHandler: CollectionMigrationHandler
+	private migrationHandler: CollectionMigrationHandler,
+	versionCollectionName?: string
     ) {
-	super(collectionName);
+	super(collectionName, versionCollectionName);
     }
 
     protected upgrade(fromVersion: number, toVersion: number) {
@@ -105,9 +105,10 @@ class ModelMigrator extends AbstractMigrator {
 
     constructor(
 	private model: Model<any>,
-	private migrationHandler: ModelMigrationHandler
+	private migrationHandler: ModelMigrationHandler,
+	versionCollectionName?: string
     ) {
-	super(model.collection.name);
+	super(model.collection.name, versionCollectionName);
     }
 
     protected upgrade(fromVersion: number, toVersion: number) {
@@ -121,13 +122,13 @@ class ModelMigrator extends AbstractMigrator {
 }
 
 
-export function migrateModel(model: Model<any>, version: number, migrationHandler: ModelMigrationHandler): Promise<any> {
-    const migrator = new ModelMigrator(model, migrationHandler);
+export function migrateModel(model: Model<any>, version: number, migrationHandler: ModelMigrationHandler, versionCollectionName?: string): Promise<any> {
+    const migrator = new ModelMigrator(model, migrationHandler, versionCollectionName);
     return migrator.migrate(version);
 }
 
 
-export function migrateCollection(collectionName: string, version: number, migrationHandler: CollectionMigrationHandler): Promise<any> {
-    const migrator = new CollectionMigrator(collectionName, migrationHandler);
+export function migrateCollection(collectionName: string, version: number, migrationHandler: CollectionMigrationHandler, versionCollectionName?: string): Promise<any> {
+    const migrator = new CollectionMigrator(collectionName, migrationHandler, versionCollectionName);
     return migrator.migrate(version);
 }
