@@ -1,3 +1,13 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/hellivan/mongoose-model-migration/compare/v0.1.1...v0.1.2) (2017-12-06)
+
+
+### Features
+
+* allow specifying version-collection name as thrid parameter for all migrators ([342394a](https://github.com/hellivan/mongoose-model-migration/commit/342394a))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/hellivan/mongoose-model-migration/compare/v0.1.0...v0.1.1) (2017-10-30)
 
