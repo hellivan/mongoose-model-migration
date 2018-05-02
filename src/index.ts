@@ -7,23 +7,23 @@ export interface CollectionVersion {
     last: number;
 }
 
-export function writeVersion(versionCollection: any, version: number): Promise<CollectionVersion> {
+export async function writeVersion(versionCollection: any, version: number): Promise<CollectionVersion> {
     let update: any = {
 	current: version,
 	updated: new Date()
     };
 
-    return readVersion(versionCollection)
-	.then(currentVersion => {
-	    if(!currentVersion) return versionCollection.insertOne(update);
+    const currentVersion = await readVersion(versionCollection);
 
-	    update['last'] = currentVersion.current;
 
-	    return versionCollection.findOneAndUpdate({_id: currentVersion._id}, update);
-	});
+    if(!currentVersion) return versionCollection.insertOne(update);
+
+    update['last'] = currentVersion.current;
+
+    return versionCollection.findOneAndUpdate({_id: currentVersion._id}, update);
 }
 
-export function readVersion(versionCollection: any): Promise<CollectionVersion> {
+export async function readVersion(versionCollection: any): Promise<CollectionVersion> {
     return versionCollection.findOne({});
 }
 
@@ -35,21 +35,23 @@ abstract class AbstractMigrator {
 	protected versionCollectionName?: string
     ) {}
 
-    public migrate(version: number): Promise<any> {
-	return readVersion(this.getVersionCollection())
-	    .then(currentVersion => {
-		if(currentVersion && currentVersion.current === version) return;
+    public async migrate(version: number): Promise<any> {
 
-		// no version available
-		const current = currentVersion && currentVersion.current;
+	const currentVersion = await readVersion(this.getVersionCollection());
 
-		if(!current || current < version) {
-		    return this.upgrade(current, version);
-		} else {
-		    return this.downgrade(current, version);
-		}
-	    })
-	    .then(() => writeVersion(this.getVersionCollection(), version));
+	if(currentVersion && currentVersion.current === version) return;
+
+	// no version available
+	const current = currentVersion && currentVersion.current;
+	
+	if(!current || current < version) {
+	    await this.upgrade(current, version);
+	} else {
+	    await this.downgrade(current, version);
+	}
+
+	return writeVersion(this.getVersionCollection(), version);
+
     }
 
     protected getCollection() {
@@ -61,9 +63,9 @@ abstract class AbstractMigrator {
 	return connection.db.collection(collectionName);
     }
 
-    protected abstract upgrade(fromVersion: number, toVersion: number);
+    protected abstract async upgrade(fromVersion: number, toVersion: number): Promise<any>;
 
-    protected abstract downgrade(fromVersion: number, toVersion: number);
+    protected abstract async downgrade(fromVersion: number, toVersion: number): Promise<any>;
 }
 
 
@@ -84,11 +86,11 @@ class CollectionMigrator extends AbstractMigrator {
 	super(collectionName, versionCollectionName);
     }
 
-    protected upgrade(fromVersion: number, toVersion: number) {
+    protected async upgrade(fromVersion: number, toVersion: number) {
 	return this.migrationHandler.up(connection.db, this.getCollection(), fromVersion, toVersion);
     }
 
-    protected downgrade(fromVersion: number, toVersion: number) {
+    protected async downgrade(fromVersion: number, toVersion: number) {
 	return Promise.reject(new Error(`Downgrading a collection from version ${fromVersion} to ${toVersion} not supported yet!`));
     }
 
@@ -111,11 +113,11 @@ class ModelMigrator extends AbstractMigrator {
 	super(model.collection.name, versionCollectionName);
     }
 
-    protected upgrade(fromVersion: number, toVersion: number) {
+    protected async upgrade(fromVersion: number, toVersion: number) {
 	return this.migrationHandler.up(connection.db, this.model, fromVersion, toVersion);
     }
 
-    protected downgrade(fromVersion: number, toVersion: number) {
+    protected async downgrade(fromVersion: number, toVersion: number) {
 	return Promise.reject(new Error(`Downgrading a model version from ${fromVersion} to ${toVersion} not supported yet!`));
     }
 
