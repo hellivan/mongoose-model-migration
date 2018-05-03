@@ -39,7 +39,7 @@ abstract class AbstractMigrator {
 
 	const currentVersion = await readVersion(this.getVersionCollection());
 
-	if(currentVersion && currentVersion.current === version) return;
+	if(currentVersion && currentVersion.current === version) return Promise.resolve();
 
 	// no version available
 	const current = currentVersion && currentVersion.current;
