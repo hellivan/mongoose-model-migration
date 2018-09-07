@@ -20,7 +20,7 @@ export async function writeVersion(versionCollection: any, version: number): Pro
 
     update['last'] = currentVersion.current;
 
-    return versionCollection.findOneAndUpdate({_id: currentVersion._id}, update);
+    return versionCollection.findOneAndUpdate({_id: currentVersion._id}, {$set: update});
 }
 
 export async function readVersion(versionCollection: any): Promise<CollectionVersion> {
