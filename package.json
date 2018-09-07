@@ -19,11 +19,11 @@
     "version": "npm run flow:changelog && git add CHANGELOG.md"
   },
   "dependencies": {
-    "@types/mongoose": "^4.7.1"
+    "@types/mongoose": "^4.7.39"
   },
   "devDependencies": {
-    "conventional-changelog-cli": "^1.2.0",
-    "typescript": "^2.1.4"
+    "conventional-changelog-cli": "^2.0.5",
+    "typescript": "^3.0.3"
   },
   "peerDependencies": {
     "mongoose": "^4.7.3"
