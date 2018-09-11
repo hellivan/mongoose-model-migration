@@ -1,3 +1,13 @@
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/hellivan/mongoose-model-migration/compare/v0.1.6...v0.1.7) (2018-09-11)
+
+
+### Bug Fixes
+
+* increase mongoose peer dep range to >=4.0.0 <6.0.0 ([f1db469](https://github.com/hellivan/mongoose-model-migration/commit/f1db469))
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/hellivan/mongoose-model-migration/compare/v0.1.5...v0.1.6) (2018-09-11)
 
