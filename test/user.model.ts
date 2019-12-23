@@ -1,7 +1,9 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-
-export const UserModel = model('User', new Schema({
-    name: String,
-    active: Boolean
-}));
+export const UserModel = model(
+    'User',
+    new Schema({
+        name: String,
+        active: Boolean
+    })
+);

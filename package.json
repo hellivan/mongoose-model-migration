@@ -1,31 +1,78 @@
 {
-  "name": "mongoose-model-migration",
-  "version": "0.1.7",
-  "engines": {
-    "node": ">=5.0.0"
-  },
-  "main": "lib/index.js",
-  "license": "MIT",
-  "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hellivan/mongoose-model-migration.git"
-  },
-  "scripts": {
-    "serve": "tsc -w",
-    "build": "tsc",
-    "start": "node lib/index.js",
-    "flow:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "version": "npm run flow:changelog && git add CHANGELOG.md"
-  },
-  "dependencies": {
-    "@types/mongoose": ">=4.0.0 <6.0.0"
-  },
-  "devDependencies": {
-    "conventional-changelog-cli": "^2.0.5",
-    "typescript": "^3.0.3"
-  },
-  "peerDependencies": {
-    "mongoose": ">=4.0.0 <6.0.0"
-  }
+    "name": "mongoose-model-migration",
+    "description": "Library for up/downgrading and versioning mongoose models",
+    "version": "0.0.0-semantic-release",
+    "engines": {
+        "node": ">=12.8.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hellivan/mongoose-model-migration.git"
+    },
+    "keywords": [
+        "mongodb",
+        "mongoose",
+        "versioning",
+        "models",
+        "collection",
+        "migration",
+        "typescript"
+    ],
+    "license": "MIT",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "rimraf ./dist && tsc -p tsconfig.build.json --incremental false",
+        "check-dependencies": "dependency-check package.json --missing --no-dev",
+        "check-formatting": "prettier --check .",
+        "format": "prettier --write .",
+        "lint": "eslint ./src --ext .ts",
+        "lint:ci": "eslint ./src --ext .ts --format junit -o reports/junit/eslint.xml",
+        "semantic-release": "semantic-release",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:debug": "node --inspect-brk -r ts-node/register node_modules/.bin/jest --runInBand",
+        "test:e2e": "jest --config ./test/jest-e2e.config.json"
+    },
+    "dependencies": {
+        "@types/mongoose": "^5.0.0",
+        "@types/mongodb": "^3.0.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^5.0.1",
+        "@semantic-release/commit-analyzer": "^8.0.1",
+        "@semantic-release/github": "^7.0.5",
+        "@semantic-release/npm": "^7.0.5",
+        "@semantic-release/release-notes-generator": "^9.0.1",
+        "@types/jest": "^25.2.1",
+        "@types/node": "^12.12.34",
+        "@typescript-eslint/eslint-plugin": "^2.27.0",
+        "@typescript-eslint/parser": "^2.27.0",
+        "condition-circle": "^2.0.2",
+        "dependency-check": "^4.1.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-plugin-prettier": "^3.1.2",
+        "husky": "^4.2.3",
+        "jest": "^25.2.7",
+        "jest-circus": "^25.2.7",
+        "jest-html-reporter": "^3.0.0",
+        "jest-junit": "^10.0.0",
+        "prettier": "^2.0.4",
+        "pretty-quick": "^2.0.1",
+        "rimraf": "^3.0.2",
+        "semantic-release": "^17.0.4",
+        "ts-jest": "^25.3.1",
+        "typescript": "~3.8.3"
+    },
+    "peerDependencies": {
+        "mongoose": "^5.0.0",
+        "mongodb": "^3.0.0"
+    }
 }
