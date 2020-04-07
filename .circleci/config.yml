@@ -49,8 +49,8 @@ jobs:
       - *attach_workspace
       - run:
           command: yarn test:cov
-      - run:
-          command: yarn test:e2e
+      #- run:
+      #    command: yarn test:e2e
       - store_test_results:
           path: reports/junit
       - codecov/upload:
