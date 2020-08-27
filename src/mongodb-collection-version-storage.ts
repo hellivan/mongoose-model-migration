@@ -27,8 +27,3 @@ export class MongodbCollectionVersionStorage implements VersionStorage {
         return this.versionCollection.findOne({});
     }
 }
-
-/*protected getVersionCollection(): Collection<CollectionVersion> {
-    const collectionName = this.options?.versionCollectionName || `${this.collectionName}.version`;
-    return connection.db.collection<CollectionVersion>(collectionName);
-}*/
