@@ -34,7 +34,7 @@ class TestVersionStorage implements VersionStorage {
 }
 
 describe('AbstractMigrator', () => {
-    test('Migrator should not update is existing version matches target version', async () => {
+    test('Migrator should not update if existing version matches target version', async () => {
         const initialVersion = { current: 1, updated: new Date() };
         const versionStorage = new TestVersionStorage(initialVersion);
         const migrator = new TestMigrator(versionStorage);
@@ -48,6 +48,23 @@ describe('AbstractMigrator', () => {
         expect(upgradeSpy).toHaveBeenCalledTimes(0);
         expect(downgradeSpy).toHaveBeenCalledTimes(0);
         expect(writeVersionSpy).toHaveBeenCalledTimes(0);
+        expect(readVersionSpy).toHaveBeenCalledTimes(1);
+    });
+
+    test('Migrator should update if current version is lower than target version', async () => {
+        const initialVersion = { current: 1, updated: new Date() };
+        const versionStorage = new TestVersionStorage(initialVersion);
+        const migrator = new TestMigrator(versionStorage);
+        const upgradeSpy = jest.spyOn(migrator, 'upgrade');
+        const downgradeSpy = jest.spyOn(migrator, 'downgrade');
+        const writeVersionSpy = jest.spyOn(versionStorage, 'writeVersion');
+        const readVersionSpy = jest.spyOn(versionStorage, 'readVersion');
+
+        const result = await migrator.migrate(2);
+        expect(result).toMatchObject({ last: 1, current: 2, updated: expect.any(Date) });
+        expect(upgradeSpy).toHaveBeenCalledTimes(1);
+        expect(downgradeSpy).toHaveBeenCalledTimes(0);
+        expect(writeVersionSpy).toHaveBeenCalledTimes(1);
         expect(readVersionSpy).toHaveBeenCalledTimes(1);
     });
 });
