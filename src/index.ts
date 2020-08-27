@@ -1,7 +1,15 @@
 export { AbstractMigrator, VersionInformation, VersionStorage } from './abstract-migrator';
+export { CollectionMigrationHandler } from './mongodb-collection-migrator';
+export { ModelMigrationHandler } from './mongoose-model-migrator';
 export {
-    CollectionMigrationHandler,
     CollectionMigratorOptions,
-    migrateCollection
-} from './mongodb-collection-migrator';
-export { ModelMigrationHandler, ModelMigratorOptions, migrateModel } from './mongoose-model-migrator';
+    migrateCollection,
+    readCollectionVersion,
+    writeCollectionVersion
+} from './mongodb-collection-versioning-utils';
+export {
+    ModelMigratorOptions,
+    migrateModel,
+    readModelVersion,
+    writeModelVersion
+} from './mongoose-model-versioning-utils';
