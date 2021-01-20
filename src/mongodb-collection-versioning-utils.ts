@@ -1,7 +1,8 @@
-import { Db } from 'mongodb';
+import type { Db } from 'mongodb';
 
-import { VersionInformation } from './abstract-migrator';
-import { CollectionMigrationHandler, CollectionMigrator } from './mongodb-collection-migrator';
+import type { VersionInformation } from './abstract-migrator';
+import type { CollectionMigrationHandler } from './mongodb-collection-migrator';
+import { CollectionMigrator } from './mongodb-collection-migrator';
 import { MongodbCollectionVersionStorage } from './mongodb-collection-version-storage';
 import { getGlobalMongooseConnectionDb } from './utils';
 

@@ -1,5 +1,5 @@
-import { Document, Model } from 'mongoose';
-import { Db } from 'mongodb';
+import type { Document, Model } from 'mongoose';
+import type { Db } from 'mongodb';
 
 import { AbstractMigrator } from './abstract-migrator';
 import { MongodbCollectionVersionStorage } from './mongodb-collection-version-storage';
