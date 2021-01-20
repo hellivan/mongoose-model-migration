@@ -1,6 +1,6 @@
-import { Collection } from 'mongodb';
+import type { Collection } from 'mongodb';
 
-import { VersionStorage, VersionInformation } from './abstract-migrator';
+import type { VersionStorage, VersionInformation } from './abstract-migrator';
 
 export class MongodbCollectionVersionStorage implements VersionStorage {
     constructor(private readonly versionCollection: Collection<VersionInformation>) {}

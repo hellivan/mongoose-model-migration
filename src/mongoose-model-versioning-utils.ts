@@ -1,9 +1,10 @@
-import { Document, Model } from 'mongoose';
-import { Db } from 'mongodb';
+import type { Document, Model } from 'mongoose';
+import type { Db } from 'mongodb';
 
-import { ModelMigrationHandler, ModelMigrator } from './mongoose-model-migrator';
+import type { ModelMigrationHandler } from './mongoose-model-migrator';
+import { ModelMigrator } from './mongoose-model-migrator';
 import { getGlobalMongooseConnectionDb } from './utils';
-import { VersionInformation } from './abstract-migrator';
+import type { VersionInformation } from './abstract-migrator';
 import { MongodbCollectionVersionStorage } from './mongodb-collection-version-storage';
 
 export interface ModelMigratorOptions {
