@@ -1,4 +1,4 @@
-import { Collection, Db } from 'mongodb';
+import type { Collection, Db } from 'mongodb';
 
 import { AbstractMigrator } from './abstract-migrator';
 import { MongodbCollectionVersionStorage } from './mongodb-collection-version-storage';

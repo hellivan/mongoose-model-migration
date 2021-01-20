@@ -29,7 +29,7 @@ export abstract class AbstractMigrator {
         return this.versionStorage.writeVersion(version);
     }
 
-    protected abstract async upgrade(fromVersion: number | null, toVersion: number): Promise<void>;
+    protected abstract upgrade(fromVersion: number | null, toVersion: number): Promise<void>;
 
-    protected abstract async downgrade(fromVersion: number, toVersion: number): Promise<void>;
+    protected abstract downgrade(fromVersion: number, toVersion: number): Promise<void>;
 }
