@@ -3,7 +3,7 @@
     "description": "Library for up/downgrading and versioning mongoose models",
     "version": "0.0.0-semantic-release",
     "engines": {
-        "node": ">=12.8.1"
+        "node": ">=12.4.0"
     },
     "repository": {
         "type": "git",
