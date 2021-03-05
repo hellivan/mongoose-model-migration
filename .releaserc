@@ -3,7 +3,6 @@
         {"name": "master"},
         {"name": "release/v1", "range": "1.x", "channel": "1.x"}
     ],
-    "verifyConditions": "condition-circle",
     "plugins": [
         "@semantic-release/commit-analyzer",
         ["@semantic-release/changelog", {
