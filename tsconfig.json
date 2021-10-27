@@ -8,7 +8,10 @@
         "declaration": true,
         "strict": true,
         "incremental": true,
-        "noUnusedLocals": true
+        "importHelpers": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true
     },
     "exclude": ["node_modules", "dist", "test"]
 }
