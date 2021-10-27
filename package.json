@@ -38,7 +38,6 @@
         "prepare": "husky install"
     },
     "dependencies": {
-        "@types/mongodb": "^3.0.0",
         "tslib": "^2.3.1"
     },
     "devDependencies": {
@@ -61,7 +60,7 @@
         "jest-circus": "^27.3.1",
         "jest-html-reporter": "^3.4.1",
         "jest-junit": "^13.0.0",
-        "mongoose": "5.11.12",
+        "mongoose": "6.0.12",
         "prettier": "^2.4.1",
         "pretty-quick": "^3.1.1",
         "rimraf": "^3.0.2",
@@ -71,6 +70,6 @@
         "yarn-deduplicate": "^3.1.0"
     },
     "peerDependencies": {
-        "mongoose": "^5.11.12"
+        "mongoose": "^6.0.12"
     }
 }
